@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Sarabun Font Example</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ใช้ฟอนต์ Sarabun กับทุกองค์ประกอบในหน้า */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #222; /* เปลี่ยนเป็นสีเข้ม */
+        color: white;
+        padding: 15px 30px; /* เพิ่ม padding ให้สูงขึ้น */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        }
+        .logo {
+            font-weight: bold;
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+        }
+        ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: flex-end;
+        }
+        ul li {
+            margin: 0 10px;
+        }
+        ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        ul li a:hover {
+            color: #ffcc00;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            ul {
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background-color: #333;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 20px;
+                border-radius: 8px;
+                display: none;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            ul.active {
+                display: flex;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translateY(8px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translateY(-8px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">MULTIMEDIA TECHNOLOGY</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="หลักสูตรสาขา3.html">หลักสูตรสาขา</a></li>
+            <li><a href="อาจารย์4.html">อาจารย์</a></li>
+            <li><a href="กิจกรรม3.html">กิจกรรม</a></li>
+            <li><a href="รอบรั้วหันตรา3.html">รอบรั้วหันตรา</a></li>
+            <li><a href="สมัครเรียน3.html">สมัครเรียน</a></li>
+            <li><a href="ข้อมูลการติดต่อ3.html">ติดต่อ</a></li>
+        </ul>
+    </nav>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+        
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Full-Width Banner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Sarabun', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Slider container */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 50vh; /* เปลี่ยนให้แบนเนอร์สูงแค่ 50% ของความสูงหน้าจอ */
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+             z-index: 1; /* กำหนดให้แบนเนอร์อยู่เบื้องหลังปุ่มเมนู */
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 2s ease-in-out;
+            width: 100%;
+        }
+
+        .slide {
+            min-width: 100%; /* ทำให้แต่ละสไลด์เต็มหน้าจอ */
+            height: 50vh; /* ทำให้ภาพในแบนเนอร์มีความสูง 50% ของความสูงหน้าจอ */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ตัวอย่างสไลด์ */
+        .slide:nth-child(1) {
+            background-image: url('https://img2.imgbiz.com/imgbiz/coming-soon-2.png');
+        }
+
+        .slide:nth-child(2) {
+            background-image: url('https://img5.pic.in.th/file/secure-sv1/-M-3.png');
+        }
+
+        .slide:nth-child(3) {
+            background-image: url('https://img5.pic.in.th/file/secure-sv1/-M-5.png');
+        }
+        
+
+
+        /* ปุ่มเลื่อน */
+        .buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* จุดสำหรับเลือกสไลด์ */
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider" id="slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+
+        <!-- ปุ่มเลื่อน -->
+        <div class="buttons">
+            <button class="button" id="prev">❮</button>
+            <button class="button" id="next">❯</button>
+        </div>
+
+        <!-- จุดสำหรับเลือกสไลด์ -->
+        <div class="dots" id="dots">
+            <div class="dot" data-slide="0"></div>
+            <div class="dot" data-slide="1"></div>
+            <div class="dot" data-slide="2"></div>
+        </div>
+    </div>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const dots = document.querySelectorAll('.dot');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+
+        let currentSlide = 0;
+
+        // Function to update the slider position
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Navigate to the previous slide
+        prev.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + dots.length) % dots.length;
+            updateSlider();
+        });
+
+        // Navigate to the next slide
+        next.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        });
+
+        // Navigate to a specific slide when clicking on a dot
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentSlide = parseInt(dot.dataset.slide);
+                updateSlider();
+            });
+        });
+
+        // Auto-slide every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        }, 5000);
+    </script>
+</body>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เทคโนโลยีมัลติมีเดีย</title>
+    <style>
+        @font-face {
+            font-family: 'ThaiSarabun';
+            src: url('thsarabunnew-webfont.woff') format('woff');
+        }
+
+        body {
+            font-family: 'ThaiSarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .text-section {
+            width: 50%;
+            padding-right: 40px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #000000;
+        }
+
+        .text-section h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .text-section p {
+            color: #000000;
+        }
+
+        .image-section {
+            width: 45%;
+            text-align: center;
+        }
+
+        .image-section img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .image-section img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .text-section {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .image-section {
+                width: 100%;
+            }
+
+            .text-section h1 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="สถานที่สำคัญในมหาวิทยาลัย">
+    <title>สถานที่ในมหาวิทยาลัย</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS */
+        body {
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f3f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Banner section */
+        .banner {
+            width: 100%;
+            height: 350px;
+            background-image: url('https://example.com/your-banner-image.jpg'); /* Replace with your banner image URL */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            margin-bottom: 10px; /* ลดระยะห่างจากแบนเนอร์ */
+        }
+
+        /* Main Title */
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2C3E50;
+            margin-top: 0; /* ลดระยะห่างจากหัวข้อ */
+            margin-bottom: 0; /* ลดระยะห่างด้านล่าง */
+            letter-spacing: 1.5px;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Card Container */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* Individual Card */
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            height: 400px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Image in Card */
+        .card img {
+            width: 100%;
+            height: 400px;  /* เพิ่มความสูงให้ภาพ */
+            object-fit: cover;
+            filter: brightness(60%); /* ดำลงเพื่อความคมชัด */
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .card img:hover {
+            opacity: 0.8;
+        }
+
+        /* Overlay text on image */
+        .card .card-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .card-content h2 {
+            font-size: 19px !important; /* บังคับให้ขนาดคงที่ */
+            color: #ffc800;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+            white-space: nowrap; /* ป้องกันการขึ้นบรรทัดใหม่ */
+            display: inline-block; /* ปรับให้เป็น inline-block เพื่อความยืดหยุ่น */
+            text-align: center; /* จัดให้อยู่กึ่งกลางถ้าต้องการ */
+ 
+        }
+
+        .card-content p {
+            font-size: 12px !important; /* บังคับให้ขนาดคงที่ */
+            color: #fff;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+            margin: 10px;
+        }
+
+        .card-text {
+            padding: 20px;
+        }
+
+        /* Full screen image for Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        /* Close button for lightbox */
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Responsive for smaller screens */
+        @media (max-width: 768px) {
+            .banner {
+                height: 250px;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr; /* 1 card per row on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="cards-container">
+            <!-- Card 1 -->
+            <div class="card" onclick="openLightbox('https://img5.pic.in.th/file/secure-sv1/IMG_22277f20066690efa059.jpg')">
+                <img src="https://img5.pic.in.th/file/secure-sv1/IMG_22277f20066690efa059.jpg" alt="IMG 2227" border="0">
+                <div class="card-content">
+                    <h2>ตึกคณะวิทยาศาสตร์และเทคโนโลยี</h2>
+                    <p>อาคารเรียน 23 อาคารเรียนที่ทันสมัย พร้อมสิ่งอำนวยความสะดวกในการเรียนการสอน</p>
+                </div>
+            </div>
+
+            <!-- Card  -->
+            <div class="card" onclick="openLightbox('https://img5.pic.in.th/file/secure-sv1/104402103_3330412513656926_7189788011826795441_n.jpg')">
+                <img src="https://img5.pic.in.th/file/secure-sv1/104402103_3330412513656926_7189788011826795441_n.jpg" alt="104402103 3330412513656926 7189788011826795441 n" border="0">
+                <div class="card-content">
+                    <h2>อาคารกิจการนักศึกษา </h2>
+                    <p>อาคาร 28 ข้างสนามกีฬา   ใช้สำหรับยื่นเอกสารต่างๆ เช่น กยศ. และมีห้องพยาบาลสำหรับนักศึกษา </p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card" onclick="openLightbox('https://img5.pic.in.th/file/secure-sv1/IMG_22591bacff437c8faa63.jpg')">
+                <img src="https://img5.pic.in.th/file/secure-sv1/IMG_2052.jpg" alt="IMG 2052" border="0">
+                <div class="card-content">
+                    <h2>ห้องสตูดิโอถ่ายภาพและวีดิทัศน์</h2>
+                    <p>ตั้งอยู่ในอาคาร 23 ชั้น 8 ห้อง 23820 ห้องสำหรับให้ฝึกใช้งานกล้อง ควบคุมกล้องและต่างๆอีกมากมาย</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card" onclick="openLightbox('https://img5.pic.in.th/file/secure-sv1/IMG_2216b25cce5ea4ef1e64.jpg')">
+                <img src="https://img2.pic.in.th/pic/IMG_2211b440606d8506069b.jpg" alt="IMG 2211" border="0">
+                <div class="card-content">
+                    <h2>ห้องสตูดิโอบันทึกเสียง</h2>
+                    <p>ตั้งอยู่ในอาคาร 23 ชั้น 8 ห้อง 23806 ห้องเรียนที่เต็มไปด้วยความสนุกสนานด้านการพากย์เสียงและร้องเพลงของนักศึกษา</p>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card" onclick="openLightbox('https://img5.pic.in.th/file/secure-sv1/475501901_470937486083578_1818456201172133435_ncea55464455300f7.jpg')">
+                <img src="https://img5.pic.in.th/file/secure-sv1/476189955_1290020908945626_540257687671515748_n.jpg" alt="476189955 1290020908945626 540257687671515748 n" border="0">
+                <div class="card-content">
+                    <h2>ห้องศิลปะและการออกเเบบ</h2>
+                    <p>ตั้งอยู่ในอาคาร 23 ชั้น 8 ห้อง 23817 ห้องเรียนที่เต็มไปด้วยการสร้างสรรค์ผลงานที่น่าทึ่งของนักศึกษา</p>
+                </div>
+            </div>
+            
+            <!-- Card 5 -->
+            <div class="card" onclick="openLightbox('https://img2.pic.in.th/pic/IMG_222011fda3a2ea01ccc5.jpg')">
+                <img src="https://img2.pic.in.th/pic/IMG_22209b60c259ba441e67.jpg" alt="IMG 2220" border="0">
+                <div class="card-content">
+                    <h2>ห้องปฎิบัติการคอมพิวเตอร์กราฟิก</h2>
+                    <p>ตั้งอยู่ในอาคาร 23 ชั้น 8 ห้อง23816 ห้องเรียนคอมพิวเตอร์ Mac ที่เต็มไปด้วยการคิดสร้างสรรค์ผลงานของนักศึกษา  </p>
+                </div>
+            </div>
+            
+            <!-- Card 6 -->
+            <div class="card" onclick="openLightbox('https://img5.pic.in.th/file/secure-sv1/IMG_2239f6ac2447340fb471.jpg')">
+                <img src="https://img5.pic.in.th/file/secure-sv1/IMG_2239f6ac2447340fb471.jpg" alt="IMG 2239" border="0">
+                <div class="card-content">
+                    <h2>ห้องสตูดิโอเทคโนโลยีเสมือนจริง</h2>
+                    <p>ตั้งอยู่ในอาคาร 23 ชั้น 8 ห้อง 23815 ห้องเรียน VR ที่เต็มไปด้วยความสนุกสนานกับการศึกษาเเละการเล่น</p>
+                </div>
+            </div>
+            
+            <!-- Card 7 -->
+            <div class="card" onclick="openLightbox('https://img2.pic.in.th/pic/IMG_2206861743ee10ec9ec9.jpg')">
+                <img src="https://img2.pic.in.th/pic/IMG_2206861743ee10ec9ec9.jpg" alt="IMG 2206" border="0">
+                <div class="card-content">
+                    <h2>ห้องปฎิบัติการเทคโนโลยีเกม</h2>
+                    <p>ตั้งอยู่ในอาคาร 23 ชั้น 8 ห้อง 23814 ห้องเรียนที่เต็มไปด้วยการคิดสร้างสรรค์ผลงานของนักศึกษา</p>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="card" onclick="openLightbox('https://img5.pic.in.th/file/secure-sv1/IMG_23012feb138c3692ec65.jpg')">
+                <img src="https://img5.pic.in.th/file/secure-sv1/IMG_23012feb138c3692ec65.jpg" alt="IMG 2301" border="0">
+                <div class="card-content">
+                    <h2>ห้องบรรยาย สาขาคอมพิวเตอร์ 2</h2>
+                    <p>ตั้งอยู่ในอาคาร 23 ชั้น 8 ห้อง 23812 ห้องเรียนที่เต็มไปด้วยการคิดสร้างสรรค์ผลงานของนักศึกษา</p>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="card" onclick="openLightbox('https://img2.imgbiz.com/imgbiz/104468345_3330411233657054_8640782620511429115_n.jpg')">
+                <img src="https://img5.pic.in.th/file/secure-sv1/105498302_3330412010323643_7021865866889593735_n.jpg" alt="105498302 3330412010323643 7021865866889593735 n" border="0">
+                <div class="card-content">
+                    <h2>สนามฟุตบอล สนามกีฑา</h2>
+                    <p>ตั้งอยู่โซนหน้ามหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ ศูนย์หันตรา สนามกีฬาที่เต็มไปด้วยความสนุกสนานทั้งกิจกรรมและกีฬาต่างๆ ใช้ได้ในเวลาราชการเท่านั้น(ยกเว้นทำเรื่องขอใช้ได้ถึงเวลา 20.00 น.)</p>
+                </div>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="card" onclick="openLightbox('https://img5.pic.in.th/file/secure-sv1/IMG_22633c5b54a48d4ca715.jpg')">
+                <img src="https://img5.pic.in.th/file/secure-sv1/IMG_22291a3ef22ea0abc3ad.jpg" alt="IMG 2229" border="0">
+                <div class="card-content">
+                    <h2>อาคารกีฬา</h2>
+                    <p>ตั้งอยู่ตรงข้ามอาคารกิจการนักศึกษา 28 สนามกีฬาที่เต็มไปด้วยกิจกรรมกีฬาหลากหลายสามารถใช้ได้ในเวลาราชการเท่านั้น(ยกเว้นทำเรื่องขอใช้ได้ถึงเวลา 20.00 น.)</p>
+                </div>
+            </div>
+            
+            <!-- Card 10 -->
+            <div class="card" onclick="openLightbox('https://img2.pic.in.th/pic/2017-04-27.jpg')">
+                <img src="https://img5.pic.in.th/file/secure-sv1/IMG_2426.jpg" alt="IMG 2426" border="0">
+                <div class="card-content">
+                    <h2>โรงอาหาร</h2>
+                    <p>ตั้งอยู่ที่ข้างๆหอประชุมพระพิรุณ​ระลึกโปรดเกล้า โรงอาหารที่เต็มไปด้วย อาหาร ของหวานที่อร่อย สะอาดและราคาถูกสำหรับนักศึกษา</p>
+                </div>
+            </div>
+
+            <!-- Card 11 -->
+            <div class="card" onclick="openLightbox('https://img2.pic.in.th/pic/IMG_2431-2.jpg')">
+                <img src="https://img2.pic.in.th/pic/IMG_2431-1.jpg" alt="IMG 2431 (1)" border="0">
+                <div class="card-content">
+                    <h2>ศูนย์ออกกำลังกาย</h2>
+                    <p>สถานที่ตั้งอยู่ข้างหลังสนามกีฬา ใช้สำหรับการออกกำลังกายกลางเเจ้ง</p>
+                </div>
+            </div>
+           
+             <!-- Card 12 -->
+             <div class="card" onclick="openLightbox('https://img2.pic.in.th/pic/IMG_2424e8fb183b1a81a2da.jpg')">
+                <img src="https://img2.pic.in.th/pic/IMG_2424e8fb183b1a81a2da.jpg" alt="IMG 2424" border="0">
+                <div class="card-content">
+                    <h2>สกู๊ดเตอร์ GOGO</h2>
+                    <p>ตั้งอยู่ข้างหน้าและข้างๆอาคาร 23 มีให้บริการพร้อมเเละเพียงพอต่อนักศึกษา </p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-close">&times;</div>
+        <img id="lightbox-image" src="" alt="Image">
+    </div>
+
+    <script>
+        // Open Lightbox with image
+        function openLightbox(imageSrc) {
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImage = document.getElementById('lightbox-image');
+            lightbox.style.display = 'flex';
+            lightboxImage.src = imageSrc;
+        }
+
+        // Close Lightbox
+        function closeLightbox() {
+            var lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Example</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS */
+        body {
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Footer Style */
+        .footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 1px 0;
+            margin-top: 40px;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 Multimedia technology | เทคโนโลยีมัลติมีเดีย .All rights reserved</p>
+        <p>ติดต่อเรา: sci.rmutsb.ac.th </p>
+    </footer>
+
+</body>
+</html>

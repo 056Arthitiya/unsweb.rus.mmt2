@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Sarabun Font Example</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ใช้ฟอนต์ Sarabun กับทุกองค์ประกอบในหน้า */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #222; /* เปลี่ยนเป็นสีเข้ม */
+        color: white;
+        padding: 15px 30px; /* เพิ่ม padding ให้สูงขึ้น */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        }
+        .logo {
+            font-weight: bold;
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+        }
+        ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: flex-end;
+        }
+        ul li {
+            margin: 0 10px;
+        }
+        ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        ul li a:hover {
+            color: #ffcc00;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            ul {
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background-color: #333;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 20px;
+                border-radius: 8px;
+                display: none;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            ul.active {
+                display: flex;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translateY(8px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translateY(-8px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">MULTIMEDIA TECHNOLOGY</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="หลักสูตรสาขา3.html">หลักสูตรสาขา</a></li>
+            <li><a href="อาจารย์4.html">อาจารย์</a></li>
+            <li><a href="กิจกรรม3.html">กิจกรรม</a></li>
+            <li><a href="รอบรั้วหันตรา3.html">รอบรั้วหันตรา</a></li>
+            <li><a href="สมัครเรียน3.html">สมัครเรียน</a></li>
+            <li><a href="ข้อมูลการติดต่อ3.html">ติดต่อ</a></li>
+        </ul>
+    </nav>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+        
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Full-Width Banner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Sarabun', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Slider container */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 50vh; /* เปลี่ยนให้แบนเนอร์สูงแค่ 50% ของความสูงหน้าจอ */
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+             z-index: 1; /* กำหนดให้แบนเนอร์อยู่เบื้องหลังปุ่มเมนู */
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 2s ease-in-out;
+            width: 100%;
+        }
+
+        .slide {
+            min-width: 100%; /* ทำให้แต่ละสไลด์เต็มหน้าจอ */
+            height: 50vh; /* ทำให้ภาพในแบนเนอร์มีความสูง 50% ของความสูงหน้าจอ */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ตัวอย่างสไลด์ */
+        .slide:nth-child(1) {
+            background-image: url('https://img2.imgbiz.com/imgbiz/coming-soon-2.png');
+        }
+
+        .slide:nth-child(2) {
+            background-image: url('https://img5.pic.in.th/file/secure-sv1/-M-3.png');
+        }
+
+        .slide:nth-child(3) {
+            background-image: url('https://img5.pic.in.th/file/secure-sv1/-M-5.png');
+        }
+        
+
+
+        /* ปุ่มเลื่อน */
+        .buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* จุดสำหรับเลือกสไลด์ */
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider" id="slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+
+        <!-- ปุ่มเลื่อน -->
+        <div class="buttons">
+            <button class="button" id="prev">❮</button>
+            <button class="button" id="next">❯</button>
+        </div>
+
+        <!-- จุดสำหรับเลือกสไลด์ -->
+        <div class="dots" id="dots">
+            <div class="dot" data-slide="0"></div>
+            <div class="dot" data-slide="1"></div>
+            <div class="dot" data-slide="2"></div>
+        </div>
+    </div>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const dots = document.querySelectorAll('.dot');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+
+        let currentSlide = 0;
+
+        // Function to update the slider position
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Navigate to the previous slide
+        prev.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + dots.length) % dots.length;
+            updateSlider();
+        });
+
+        // Navigate to the next slide
+        next.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        });
+
+        // Navigate to a specific slide when clicking on a dot
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentSlide = parseInt(dot.dataset.slide);
+                updateSlider();
+            });
+        });
+
+        // Auto-slide every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        }, 5000);
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กิจกรรมล่าสุด</title>
+    <style>
+        
+        body {
+            font-family: 'Sarabun' , sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            text-align: center;
+        }
+        h2 {
+            margin: 15px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            font-family: 'Sarabun', sans-serif;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .card img {
+            width: 100%;
+            height: 200px; /* ปรับความสูงของรูปให้เท่ากัน */
+            border-radius: 200px;
+        }
+
+        .card p {
+            font-size: 14px; /* ขนาดตัวอักษร */
+            color: #555; /* สีตัวอักษร */
+            font-family: thai sarabun, sans-serif; /* รูปแบบตัวอักษร */
+            line-height: 1.5; /* ระยะห่างระหว่างบรรทัด */
+            text-align: left; /* จัดข้อความชิดซ้าย */
+        }
+        
+        .uniform-button {
+  display: inline-block;
+  width: 115px; /* ความกว้าง */
+  height: 50px; /* ความสูง */
+  line-height: 50px; /* ทำให้ข้อความอยู่กลางแนวตั้ง */
+  text-align: center; /* จัดข้อความให้อยู่กลางแนวนอน */
+  font-size: 14px; /* ขนาดข้อความ */
+  border-radius: 8px; /* มุมโค้ง */
+  background-color: #007bff; /* สีพื้นหลัง */
+  color: #fff; /* สีข้อความ */
+  text-decoration: none; /* ลบขีดเส้นใต้ */
+  border: none; /* ไม่มีเส้นขอบ */
+  cursor: pointer; /* เปลี่ยนเคอร์เซอร์เมื่อ hover */
+}
+
+.uniform-button:hover {
+  background-color: #ffdd00; /* เปลี่ยนสีเมื่อ hover */
+}
+    </style>
+</head>
+<body>
+<!-- Title displayed inside the body section -->
+<div class="professors-card-container">
+    <h2>กิจกรรมในสาขา</h2>
+    <div class="grid">
+        <div class="card">
+                <img src="https://img2.imgbiz.com/imgbiz/467615772_1064430005474408_8633932983511951707_n.jpg" alt="กิจกรรม" />
+            <p>คณะจารย์และนักศึกษาหลักสูตรเทคโนโลยีมัลติมีเดีย ได้ต้อนรับและนำเสนอผลงาน Digital Heritage : มรดกทางวัฒนธรรม สู่นวัตกรรมดิจิทัล...</p>
+            <a href="https://www.facebook.com/share/p/18udwXGC83/" class="uniform-button">อ่านเพิ่มเติม</a>
+
+        </div>
+
+        <div class="card">
+            <img src="https://img2.imgbiz.com/imgbiz/467781512_1062923458958396_3389618824824092175_n.jpg" alt="กิจกรรม" />
+            <p>ได้รับรางวัล รองชนะเลิศอันดับหนึ่ง  ในการส่งผลงานภาพยนตร์สั้น ปมหลอน ซ่อนวิญญาณ ตอน แฟลชไดรฟ์ เข้าประกวดในโครงการประกวดภาพยนตร์...</p>
+            <a href="https://www.facebook.com/share/p/15q2tt3c5b/" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img2.imgbiz.com/imgbiz/unnameda161c3612db7ab4c.jpg" alt="กิจกรรม" />
+            <p>คณะจารย์ และนักศึกษาสาขาวิชาเทคโนโลยีมัลติมีเดีย มทร.สุวรรณภูมิ ได้ส่งผลงานและร่วมพิธีเปิด ในการแสดงผลงานศิลปะและการ...</p>
+            <a href="https://www.facebook.com/share/p/12CjyzvzHww/" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img2.imgbiz.com/imgbiz/453739136_926969089235738_1369122911464267765_n.jpg" alt="กิจกรรม" />
+            <p>สาขาวิชาเทคโนโลยีมัลติมีเดีย ศูนย์หันตรา เป็นตัวแทนมหาวิทยาลัยนำเสนอผลงานอาจารย์และนักศึกษา ในงาน อว.แฟร์ อว.แฟร์:...</p>
+            <a href="https://www.facebook.com/share/p/1Ww8KgBZm7/" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img2.imgbiz.com/imgbiz/unnamed-135aaf269501abe37.jpg" alt="กิจกรรม" />
+            <p>วันที่ 31 กรกฎาคม 2567 หลักสูตรเทคโนโลยีมัลติมีเดีย พานักศึกษา ศึกษาดูงาน ณ พิพิธภัณฑ์พระรามเก้า องค์การพิพิธภัณฑ์วิทยา...</p>
+            <a href="https://www.facebook.com/share/p/1DTTzmqSSA/" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img2.imgbiz.com/imgbiz/unnamed-2d2744b361d9d067e.jpg" alt="กิจกรรม" />
+            <p>ได้รับรางวัลรองชนะเลิศอันดับสอง ระดับจังหวัดจากการประกวดคลิปวีดิโอ “Unseen อยุธยา…ที่ไม่รู้จัก” เมื่อวันที่ 28 มีนาคม 2567...</p>
+            <a href="https://www.facebook.com/share/p/1BBHtZHUsu/" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img2.pic.in.th/pic/391674557_24028929410055643_1743630348500043771_n.jpg" alt="391674557 24028929410055643 1743630348500043771 n" border="0">
+            <p>ขอเชิญชวนทุกท่านมาร่วมชมและให้กำลังใจนักศึกษาในนิทรรศการภาพถ่ายเชิงวัฒนธรรมและวิถีชีวิต ประจำปี ของนักศึกษากลุ่ม ...</p>
+            <a href="https://www.facebook.com/MMT.RUS/posts/pfbid0zwtyGfcGPzwuuLSPpEV1j2mnYETCciViM9yvGqhcDdXT8uUVkLA6cJwTMk9LXT27l" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img5.pic.in.th/file/secure-sv1/394213265_7546394022044249_897412889611254270_n.jpg" alt="394213265 7546394022044249 897412889611254270 n" border="0">
+            <p>พร้อมนำเสนอผลงานโปรเจครายวิชา Operating Skills for Multimedia Technology กลุ่มเรียน MMT46621N แอนิเมชั่น 2มิติ...</p>
+            <a href="https://www.facebook.com/MMT.RUS/posts/pfbid028Jue36d4Ki2wQpeCiB1SwBE56F2yGnjwzTEBb3ANsqMb7CV5AmV5NVwt2dwNgBBKl" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img2.pic.in.th/pic/429889467_899336048650472_1399312900638385929_n.jpg" alt="429889467 899336048650472 1399312900638385929 n" border="0">
+            <p>เมื่อวันที่ 8 มีนาคม พ.ศ.2567 หลักสูตรเทคโนโลยีมัลติมีเดีย ศูนย์หันตรา ได้จัดโครงการอบรมเชิงปฏิบัติ...</p>
+            <a href="https://www.facebook.com/MMT.RUS/posts/pfbid028Qb1wdsLbceADxPDSabuny9RA3bcW4UnXPBAZcoCCmjDSFU9kTvHUk3TocSSWDPdl" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img2.pic.in.th/pic/451863292_8712561888760784_5735969509666001331_n.jpg" alt="451863292 8712561888760784 5735969509666001331 n" border="0">
+            <p>ตอบโจทย์การเป็นบัณฑิตนักปฏิบัติ เพราะเราเน้นเรียนปฏิบัติ ฝึกเล่าเรื่อง และหัดพากย์...</p>
+            <a href="https://www.facebook.com/MMT.RUS/posts/pfbid02CsdgX8TerKadDoHxYPf6vU3wL1QaSdyJKCNb6Thki5EPTkDSKho9Y5tsXCZz2pKQl" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img5.pic.in.th/file/secure-sv1/361919902_771317768118968_5885419269633810228_n.jpg" alt="361919902 771317768118968 5885419269633810228 n" border="0">
+            <p>นอกจากจะต้องได้อาจารย์ที่มีความตั้งใจ และฝีมือดีแล้ว อุปกรณ์ที่จำเป็นต้องใช้ถ่ายทอดก็มีความสำคัญ ห้องART..</p>
+            <a href="https://www.facebook.com/share/p/1BCJybWsKr/" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img5.pic.in.th/file/secure-sv1/459222114_9057586860924950_1404648603308530617_n.jpg" alt="459222114 9057586860924950 1404648603308530617 n" border="0">
+            <p>เปิดโลกชมรม...2567 ในฐานะอาจารย์ที่ปรึกษาชมรมคนสร้างสื่อ Media Art...</p>
+            <a href="https://www.facebook.com/share/p/15Zssmf2NS/" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img5.pic.in.th/file/secure-sv1/471126401_9778955648788064_4047323194422789867_n.jpg" alt="471126401 9778955648788064 4047323194422789867 n" border="0">
+            <p>วันที่ 20 ธันวาคม 2567 ร่วมกิจกรรมพัฒนาและประกวดผลงานนวัตกรคุณธรรม (Moral Maker) ภายใต้โครงการ...</p>
+            <a href="https://www.facebook.com/share/p/154P6gew6M/" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img5.pic.in.th/file/secure-sv1/463493190_9370264419657191_3409869768661019545_n.jpg" alt="463493190 9370264419657191 3409869768661019545 n" border="0">
+            <p>วันที่ 17 ตุลาคม 2567 ทีมคณะวิทยาศาสตร์เทคโนโลยี จัดแสดงผลงานเพื่อนำเสนอต่อคณะศึกษาดูงานเพื่อ...</p>
+            <a href="https://www.facebook.com/share/p/18uVH4rTP1/" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img2.pic.in.th/pic/458546042_9022928534390783_1958796599035524330_n.jpg" alt="458546042 9022928534390783 1958796599035524330 n" border="0">
+            <p>ฝึกให้นักศึกษาได้เรียนรู้และฝึกปฏิบัติงานในสตูดิโอเกี่ยวกับการเป็นสตรีมมิ่งเบื้องต้น...</p>
+            <a href="https://www.facebook.com/share/p/1APVsYo3U7/" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+        <div class="card">
+            <img src="https://img2.pic.in.th/pic/458338888_9009414292408874_142105199024482989_n.jpg" alt="458338888 9009414292408874 142105199024482989 n" border="0">
+            <p>เป็นวันที่ปล่อยนักศึกษาเลิกเรียน แต่พวกเค้าไม่ยอมเลิก เพราะมัวสนุกในการเล่าเรื่อง จาก Workshop เล่าเรื่อง...</p>
+            <a href="https://www.facebook.com/share/p/12CdTWhc8VK/" class="uniform-button">อ่านเพิ่มเติม</a>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="แหล่งรวมกิจกรรมดีๆ สำหรับทุกคน ตั้งแต่กิจกรรมเด็ก สัมมนา ไปจนถึงโครงการจิตอาสา">
+    <title>กิจกรรม</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .card-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+        .footer {
+            padding: 5px; /* ปรับให้ Footer สูงขึ้น */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Multimedia technology | เทคโนโลยีมัลติมีเดีย .All rights reserved</p>
+        <p>ติดต่อเรา: sci.rmutsb.ac.th </p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Sarabun Font Example</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ใช้ฟอนต์ Sarabun กับทุกองค์ประกอบในหน้า */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #222; /* เปลี่ยนเป็นสีเข้ม */
+        color: white;
+        padding: 15px 30px; /* เพิ่ม padding ให้สูงขึ้น */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        }
+        .logo {
+            font-weight: bold;
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+        }
+        ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: flex-end;
+        }
+        ul li {
+            margin: 0 10px;
+        }
+        ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        ul li a:hover {
+            color: #ffcc00;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            ul {
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background-color: #333;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 20px;
+                border-radius: 8px;
+                display: none;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            ul.active {
+                display: flex;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translateY(8px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translateY(-8px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">MULTIMEDIA TECHNOLOGY</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="หลักสูตรสาขา3.html">หลักสูตรสาขา</a></li>
+            <li><a href="อาจารย์4.html">อาจารย์</a></li>
+            <li><a href="กิจกรรม3.html">กิจกรรม</a></li>
+            <li><a href="รอบรั้วหันตรา3.html">รอบรั้วหันตรา</a></li>
+            <li><a href="สมัครเรียน3.html">สมัครเรียน</a></li>
+            <li><a href="ข้อมูลการติดต่อ3.html">ติดต่อ</a></li>
+        </ul>
+    </nav>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+        
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Full-Width Banner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Sarabun', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Slider container */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 50vh; /* เปลี่ยนให้แบนเนอร์สูงแค่ 50% ของความสูงหน้าจอ */
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+             z-index: 1; /* กำหนดให้แบนเนอร์อยู่เบื้องหลังปุ่มเมนู */
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 2s ease-in-out;
+            width: 100%;
+        }
+
+        .slide {
+            min-width: 100%; /* ทำให้แต่ละสไลด์เต็มหน้าจอ */
+            height: 50vh; /* ทำให้ภาพในแบนเนอร์มีความสูง 50% ของความสูงหน้าจอ */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ตัวอย่างสไลด์ */
+        .slide:nth-child(1) {
+            background-image: url('https://img2.imgbiz.com/imgbiz/coming-soon-2.png');
+        }
+
+        .slide:nth-child(2) {
+            background-image: url('https://img2.imgbiz.com/imgbiz/-M-1.png');
+        }
+
+        .slide:nth-child(3) {
+            background-image: url('https://img2.imgbiz.com/imgbiz/-M-3.png');
+        }
+        
+
+
+        /* ปุ่มเลื่อน */
+        .buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* จุดสำหรับเลือกสไลด์ */
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider" id="slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+
+        <!-- ปุ่มเลื่อน -->
+        <div class="buttons">
+            <button class="button" id="prev">❮</button>
+            <button class="button" id="next">❯</button>
+        </div>
+
+        <!-- จุดสำหรับเลือกสไลด์ -->
+        <div class="dots" id="dots">
+            <div class="dot" data-slide="0"></div>
+            <div class="dot" data-slide="1"></div>
+            <div class="dot" data-slide="2"></div>
+        </div>
+    </div>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const dots = document.querySelectorAll('.dot');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+
+        let currentSlide = 0;
+
+        // Function to update the slider position
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Navigate to the previous slide
+        prev.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + dots.length) % dots.length;
+            updateSlider();
+        });
+
+        // Navigate to the next slide
+        next.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        });
+
+        // Navigate to a specific slide when clicking on a dot
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentSlide = parseInt(dot.dataset.slide);
+                updateSlider();
+            });
+        });
+
+        // Auto-slide every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        }, 5000);
+    </script>
+</body>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เทคโนโลยีมัลติมีเดีย</title>
+    <style>
+        @font-face {
+            font-family: 'ThaiSarabun';
+            src: url('thsarabunnew-webfont.woff') format('woff');
+        }
+
+        body {
+            font-family: 'ThaiSarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .text-section {
+            width: 50%;
+            padding-right: 40px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #000000;
+        }
+
+        .text-section h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .text-section p {
+            color: #000000;
+        }
+
+        .image-section {
+            width: 45%;
+            text-align: center;
+        }
+
+        .image-section img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .image-section img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .text-section {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .image-section {
+                width: 100%;
+            }
+
+            .text-section h1 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Information</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Sarabun', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .map-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr; /* แสดงผลเป็นคอลัมน์เดียวเมื่อจอเล็ก */
+            }
+
+            iframe {
+                height: 300px; /* ลดความสูงของ Google Maps บนอุปกรณ์มือถือ */
+            }
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-card h2 {
+            font-size: 1.5rem;
+            color: #333;
+            border-bottom: 2px solid #4A90E2;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .contact-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-card ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .contact-card ul li strong {
+            color: #333;
+        }
+
+        .contact-card ul li a {
+            color: #4A90E2;
+            text-decoration: none;
+        }
+
+        .contact-card ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main a {
+            color: #007BFF;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        main a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <div class="map-container">
+            <h2>ข้อมูลการติดต่อ</h2>
+            <iframe src="https://www.google.com/maps?q=14.377061319103834,100.60394692824575&z=17&hl=th&output=embed"></iframe>
+        </div>
+
+        <div class="grid-container">
+            <div class="contact-card">
+                <h2>ข้อมูลการติดต่อของคณะวิทยาศาสตร์และเทคโนโลยี</h2> 
+                    <li><strong>ที่อยู่:</strong> เลขที่ 60 หมู่ 3 ถนนสายเอเชีย (กรุงเทพ-นครสวรรค์)</li>
+                    <li><strong>Email:</strong> scirmutsb001@gmail.com</li>
+                    <li><strong>Phone:</strong> 092-2630-007</li>
+                    <li><strong>Website:</strong> <a href="https://sci.rmutsb.ac.th" target="_blank">sci.rmutsb.ac.th</a></li>
+                    <li><strong>Facebook:</strong> <a href="https://www.facebook.com/SCI.RMUTSB" target="_blank">SCI.RMUTSB</a></li>
+            </div>
+
+            <div class="contact-card">
+                <h2>ข้อมูลการติดต่อของสาขาเทคโนโลยีมัลติมีเดีย</h2>
+                    <li><strong>ที่อยู่:</strong> เลขที่ 60 หมู่ 3 ถนนสายเอเชีย (กรุงเทพ-นครสวรรค์)</li>
+                    <li><strong>Email:</strong> mmt.rus@rmutsb.ac.th</li>
+                    <li><strong>Phone:</strong> 092-2630-007</li>
+                    <li><strong>Website:</strong> <a href="https://sci.rmutsb.ac.th" target="_blank">sci.rmutsb.ac.th</a></li>
+                    <li><strong>Facebook:</strong> <a href="https://www.facebook.com/share/15WvCfbSWK" target="_blank">Multimedia RMUTSB</a></li>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Example</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS */
+        body {
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Footer Style */
+        .footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 1px 0;
+            margin-top: 40px;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 Multimedia technology | เทคโนโลยีมัลติมีเดีย .All rights reserved</p>
+        <p>ติดต่อเรา: sci.rmutsb.ac.th </p>
+    </footer>
+
+</body>
+</html>
+

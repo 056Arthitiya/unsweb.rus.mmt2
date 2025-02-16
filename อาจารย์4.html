@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Sarabun Font Example</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ใช้ฟอนต์ Sarabun กับทุกองค์ประกอบในหน้า */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #222; /* เปลี่ยนเป็นสีเข้ม */
+        color: white;
+        padding: 15px 30px; /* เพิ่ม padding ให้สูงขึ้น */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        }
+        .logo {
+            font-weight: bold;
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+        }
+        ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: flex-end;
+        }
+        ul li {
+            margin: 0 10px;
+        }
+        ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        ul li a:hover {
+            color: #ffcc00;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            ul {
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background-color: #333;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 20px;
+                border-radius: 8px;
+                display: none;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            ul.active {
+                display: flex;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translateY(8px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translateY(-8px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">MULTIMEDIA TECHNOLOGY</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="หลักสูตรสาขา3.html">หลักสูตรสาขา</a></li>
+            <li><a href="อาจารย์4.html">อาจารย์</a></li>
+            <li><a href="กิจกรรม3.html">กิจกรรม</a></li>
+            <li><a href="รอบรั้วหันตรา3.html">รอบรั้วหันตรา</a></li>
+            <li><a href="สมัครเรียน3.html">สมัครเรียน</a></li>
+            <li><a href="ข้อมูลการติดต่อ3.html">ติดต่อ</a></li>
+        </ul>
+    </nav>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+        
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Full-Width Banner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Sarabun', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Slider container */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 50vh; /* เปลี่ยนให้แบนเนอร์สูงแค่ 50% ของความสูงหน้าจอ */
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+             z-index: 1; /* กำหนดให้แบนเนอร์อยู่เบื้องหลังปุ่มเมนู */
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 2s ease-in-out;
+            width: 100%;
+        }
+
+        .slide {
+            min-width: 100%; /* ทำให้แต่ละสไลด์เต็มหน้าจอ */
+            height: 50vh; /* ทำให้ภาพในแบนเนอร์มีความสูง 50% ของความสูงหน้าจอ */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ตัวอย่างสไลด์ */
+        .slide:nth-child(1) {
+            background-image: url('https://img2.imgbiz.com/imgbiz/coming-soon-2.png');
+        }
+
+        .slide:nth-child(2) {
+            background-image: url('https://img5.pic.in.th/file/secure-sv1/-M-3.png');
+        }
+
+        .slide:nth-child(3) {
+            background-image: url('https://img5.pic.in.th/file/secure-sv1/-M-5.png');
+        }
+        
+
+
+        /* ปุ่มเลื่อน */
+        .buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* จุดสำหรับเลือกสไลด์ */
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider" id="slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+
+        <!-- ปุ่มเลื่อน -->
+        <div class="buttons">
+            <button class="button" id="prev">❮</button>
+            <button class="button" id="next">❯</button>
+        </div>
+
+        <!-- จุดสำหรับเลือกสไลด์ -->
+        <div class="dots" id="dots">
+            <div class="dot" data-slide="0"></div>
+            <div class="dot" data-slide="1"></div>
+            <div class="dot" data-slide="2"></div>
+        </div>
+    </div>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const dots = document.querySelectorAll('.dot');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+
+        let currentSlide = 0;
+
+        // Function to update the slider position
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Navigate to the previous slide
+        prev.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + dots.length) % dots.length;
+            updateSlider();
+        });
+
+        // Navigate to the next slide
+        next.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        });
+
+        // Navigate to a specific slide when clicking on a dot
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentSlide = parseInt(dot.dataset.slide);
+                updateSlider();
+            });
+        });
+
+        // Auto-slide every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        }, 5000);
+    </script>
+</body>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เทคโนโลยีมัลติมีเดีย</title>
+    <style>
+        @font-face {
+            font-family: 'ThaiSarabun';
+            src: url('thsarabunnew-webfont.woff') format('woff');
+        }
+
+        body {
+            font-family: 'ThaiSarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .text-section {
+            width: 50%;
+            padding-right: 40px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #000000;
+        }
+
+        .text-section h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .text-section p {
+            color: #000000;
+        }
+
+        .image-section {
+            width: 45%;
+            text-align: center;
+        }
+
+        .image-section img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .image-section img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .text-section {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .image-section {
+                width: 100%;
+            }
+
+            .text-section h1 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+</html>
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อาจารย์ผู้สอน</title>
+    <style>
+        h2 {
+            font-size: 2rem; /* ขนาดตัวอักษร */
+            color: #333; /* สีตัวอักษร */
+            text-align: center; /* จัดให้อยู่ตรงกลาง */
+            margin: 5px 0 40px 0; /* ระยะห่าง: บน 30px, ล่าง 40px */
+            line-height: 1; /* ระยะห่างระหว่างบรรทัด */
+            font-weight: normal; /* ตัวอักษรปกติ (ไม่หนา) */
+            font-family: 'Sarabun', sans-serif; /* ใช้ฟอนต์ Sarabun */
+        }
+
+        .professors-card-container {
+            background-color: white;
+            border: 70px solid #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 60px 40px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .professors-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-content: center; /* จัดให้อยู่กึ่งกลาง */
+        }
+
+        .professor-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            height: 530px;
+            object-fit: cover;
+        }
+
+        .professor-card img {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .professor-card h3 {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .professor-card p {
+            font-size: 0.8rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .professor-card .btn {
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .professor-card .btn:hover {
+            background-color: #ffdd00;
+        }
+      
+    </style>
+</head>
+<body>
+    <div class="professors-section">
+        <!-- Title displayed inside the body section -->
+        <div class="professors-card-container">
+            <h2>อาจารย์ผู้สอน</h2>
+            <div class="professors-container">
+                <div class="professor-card">
+                    <img src="https://img5.pic.in.th/file/secure-sv1/2d6e374b36bdf33f1.jpg" alt="2" border="0">
+                    <h3>ผศ.ดร.สรชัย ชวรางกูร</h3>
+                    <p>ตำแหน่ง: อาจารย์ประจำหลักสูตร</p>
+                    <a href="https://sci.rmutsb.ac.th/2024/12/23/%e0%b8%9c%e0%b8%a8-%e0%b8%94%e0%b8%a3-%e0%b8%aa%e0%b8%a3%e0%b8%8a%e0%b8%b1%e0%b8%a2-%e0%b8%8a%e0%b8%a7%e0%b8%a3%e0%b8%b2%e0%b8%87%e0%b8%81%e0%b8%b9%e0%b8%a3/" class="btn custom-button">ความเชี่ยวชาญ</a>
+                </div>
+                
+                <div class="professor-card">
+                    <img src="https://img5.pic.in.th/file/secure-sv1/5f010421d75668640.jpg" alt="5" border="0">
+                    <h3>ผศ.ดร.ณพงศ์ วรรณพิรุณ</h3>
+                    <p>ตำแหน่ง: อาจารย์ประจำหลักสูตร</p>
+                    <a href="https://sci.rmutsb.ac.th/2024/12/23/%e0%b8%9c%e0%b8%a8-%e0%b8%94%e0%b8%a3-%e0%b8%93%e0%b8%9e%e0%b8%87%e0%b8%a8%e0%b9%8c-%e0%b8%a7%e0%b8%a3%e0%b8%a3%e0%b8%93%e0%b8%9e%e0%b8%b4%e0%b8%a3%e0%b8%b8%e0%b8%93/" class="btn custom-button">ความเชี่ยวชาญ</a>
+                </div>
+               
+                <div class="professor-card">
+                    <img src="https://img5.pic.in.th/file/secure-sv1/34aff9b170b5ecbe9.jpg" alt="3" border="0">
+                    <h3>ผศ.อธิษฐ์ คู่เจริญถาวร</h3>
+                    <p>ตำแหน่ง: อาจารย์ประจำหลักสูตร</p>
+                    <a href="https://sci.rmutsb.ac.th/2024/12/23/%e0%b8%9c%e0%b8%a8-%e0%b8%ad%e0%b8%98%e0%b8%b4%e0%b8%a9%e0%b8%90%e0%b9%8c-%e0%b8%84%e0%b8%b9%e0%b9%88%e0%b9%80%e0%b8%88%e0%b8%a3%e0%b8%b4%e0%b8%8d%e0%b8%96%e0%b8%b2%e0%b8%a7%e0%b8%a3/" class="btn custom-button">ความเชี่ยวชาญ</a>
+                </div>
+                
+                <div class="professor-card">
+                    <img src="https://img2.pic.in.th/pic/48da51b8321ce5a44.jpg" alt="4" border="0">
+                    <h3>ผช.ชัชฎา ชวรางกูร</h3>
+                    <p>ตำแหน่ง: อาจารย์ประจำหลักสูตร</p>
+                    <a href="https://sci.rmutsb.ac.th/2024/12/23/%e0%b8%9c%e0%b8%8a-%e0%b8%8a%e0%b8%b1%e0%b8%8a%e0%b8%8e%e0%b8%b2-%e0%b8%8a%e0%b8%a7%e0%b8%a3%e0%b8%b2%e0%b8%87%e0%b8%81%e0%b8%b9%e0%b8%a3/" class="btn custom-button">ความเชี่ยวชาญ</a>
+                </div>
+                
+                <div class="professor-card">
+                    <img src="https://img5.pic.in.th/file/secure-sv1/10314f9f864b1a9846.jpg" alt="10" border="0">
+                    <h3>อาจารย์ทักศิณา คงสมลาภ</h3>
+                    <p>ตำแหน่ง: อาจารย์ประจำหลักสูตร</p>
+                    <a href="https://sci.rmutsb.ac.th/2024/12/23/%e0%b8%ad%e0%b8%b2%e0%b8%88%e0%b8%b2%e0%b8%a3%e0%b8%a2%e0%b9%8c%e0%b8%97%e0%b8%b1%e0%b8%81%e0%b8%a8%e0%b8%b4%e0%b8%93%e0%b8%b2-%e0%b8%84%e0%b8%87%e0%b8%aa%e0%b8%a1%e0%b8%a5%e0%b8%b2%e0%b8%a0/ " class="btn custom-button">ความเชี่ยวชาญ</a>
+                </div>
+                
+                <div class="professor-card">
+                    <img src="https://img2.pic.in.th/pic/62f3580ab4777d5a4.jpg" alt="6" border="0">
+                    <h3>อาจารย์พงฐฉัตร เนียมทรง </h3>
+                    <p>ตำแหน่ง: อาจารย์ผู้สอน</p>
+                    <a href="https://sci.rmutsb.ac.th/2024/12/23/%E0%B8%AD%E0%B8%B2%E0%B8%88%E0%B8%B2%E0%B8%A3%E0%B8%A2%E0%B9%8C%E0%B8%9E%E0%B8%87%E0%B8%90%E0%B8%89%E0%B8%B1%E0%B8%95%E0%B8%A3-%E0%B9%80%E0%B8%99%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%97%E0%B8%A3%E0%B8%87/?utm_source=chatgpt.com" class="btn custom-button">ความเชี่ยวชาญ</a>
+                </div>
+                
+                <div class="professor-card">
+                    <img src="https://img2.pic.in.th/pic/95c5058006849c1d6.jpg" alt="9" border="0">
+                    <h3> อาจารย์สุนทรี แก่นแก้ว</h3>
+                    <p>ตำแหน่ง: อาจารย์ผู้สอน</p>
+                    <a href="https://sci.rmutsb.ac.th/2024/12/23/%e0%b8%ad%e0%b8%b2%e0%b8%88%e0%b8%b2%e0%b8%a3%e0%b8%a2%e0%b9%8c%e0%b8%aa%e0%b8%b8%e0%b8%99%e0%b8%97%e0%b8%a3%e0%b8%b5-%e0%b9%81%e0%b8%81%e0%b9%88%e0%b8%99%e0%b9%81%e0%b8%81%e0%b9%89%e0%b8%a7/ " class="btn custom-button">ความเชี่ยวชาญ</a>
+                </div>
+                
+                <div class="professor-card">
+                    <img src="https://img2.pic.in.th/pic/7a13900ec7d3abb51.jpg" alt="7" border="0">
+                    <h3>ดร.ศิวพร ลินทะลึก </h3>
+                    <p>ตำแหน่ง: อาจารย์ผู้สอน</p>
+                    <a href=" https://scholar.google.com/citations?hl=th&user=DufUcJUAAAAJ&utm_source=chatgpt.com" class="btn custom-button">ความเชี่ยวชาญ</a>
+                </div>
+                
+                <div class="professor-card">
+                    <img src="https://img5.pic.in.th/file/secure-sv1/860b7e4e993e35b50.jpg" alt="8" border="0">
+                    <h3> อาจารย์ยศรัณย์ จุลอำพันธ์</h3>
+                    <p>ตำแหน่ง: อาจารย์ผู้สอน</p>
+                    <a href=" " class="btn custom-button">ความเชี่ยวชาญ</a>
+                </div>
+               
+                <div class="professor-card">
+                    <img src="https://img5.pic.in.th/file/secure-sv1/1fdb592f6f5bc008a.jpg" alt="1" border="0">
+                    <h3>อาจารย์อธิวัฒน์ เกียรติพีรติกลุ </h3>
+                    <p>ตำแหน่ง: อาจารย์ผู้สอน</p>
+                    <a href="  " class="btn custom-button">ความเชี่ยวชาญ</a>
+                </div>
+           
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Example</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS */
+        body {
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Footer Style */
+        .footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 1px 0;
+            margin-top: 40px;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 Multimedia technology | เทคโนโลยีมัลติมีเดีย .All rights reserved</p>
+        <p>ติดต่อเรา: sci.rmutsb.ac.th </p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Sarabun Font Example</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ใช้ฟอนต์ Sarabun กับทุกองค์ประกอบในหน้า */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #222; /* เปลี่ยนเป็นสีเข้ม */
+        color: white;
+        padding: 15px 30px; /* เพิ่ม padding ให้สูงขึ้น */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        }
+        .logo {
+            font-weight: bold;
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+        }
+        ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: flex-end;
+        }
+        ul li {
+            margin: 0 10px;
+        }
+        ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        ul li a:hover {
+            color: #ffcc00;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            ul {
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background-color: #333;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 20px;
+                border-radius: 8px;
+                display: none;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            ul.active {
+                display: flex;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translateY(8px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translateY(-8px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">MULTIMEDIA TECHNOLOGY</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="หลักสูตรสาขา3.html">หลักสูตรสาขา</a></li>
+            <li><a href="อาจารย์4.html">อาจารย์</a></li>
+            <li><a href="กิจกรรม3.html">กิจกรรม</a></li>
+            <li><a href="รอบรั้วหันตรา3.html">รอบรั้วหันตรา</a></li>
+            <li><a href="สมัครเรียน3.html">สมัครเรียน</a></li>
+            <li><a href="ข้อมูลการติดต่อ3.html">ติดต่อ</a></li>
+        </ul>
+    </nav>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const menu = document.getElementById('menu');
+        
+        hamburger.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Full-Width Banner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Sarabun', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Slider container */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 50vh; /* เปลี่ยนให้แบนเนอร์สูงแค่ 50% ของความสูงหน้าจอ */
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+             z-index: 1; /* กำหนดให้แบนเนอร์อยู่เบื้องหลังปุ่มเมนู */
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 2s ease-in-out;
+            width: 100%;
+        }
+
+        .slide {
+            min-width: 100%; /* ทำให้แต่ละสไลด์เต็มหน้าจอ */
+            height: 50vh; /* ทำให้ภาพในแบนเนอร์มีความสูง 50% ของความสูงหน้าจอ */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ตัวอย่างสไลด์ */
+        .slide:nth-child(1) {
+            background-image: url('https://img2.imgbiz.com/imgbiz/coming-soon-2.png');
+        }
+
+        .slide:nth-child(2) {
+            background-image: url('https://img5.pic.in.th/file/secure-sv1/-M-3.png');
+        }
+
+        .slide:nth-child(3) {
+            background-image: url('https://img5.pic.in.th/file/secure-sv1/-M-5.png');
+        }
+        
+
+
+        /* ปุ่มเลื่อน */
+        .buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* จุดสำหรับเลือกสไลด์ */
+        .dots {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider" id="slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+
+        <!-- ปุ่มเลื่อน -->
+        <div class="buttons">
+            <button class="button" id="prev">❮</button>
+            <button class="button" id="next">❯</button>
+        </div>
+
+        <!-- จุดสำหรับเลือกสไลด์ -->
+        <div class="dots" id="dots">
+            <div class="dot" data-slide="0"></div>
+            <div class="dot" data-slide="1"></div>
+            <div class="dot" data-slide="2"></div>
+        </div>
+    </div>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const dots = document.querySelectorAll('.dot');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+
+        let currentSlide = 0;
+
+        // Function to update the slider position
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Navigate to the previous slide
+        prev.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + dots.length) % dots.length;
+            updateSlider();
+        });
+
+        // Navigate to the next slide
+        next.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        });
+
+        // Navigate to a specific slide when clicking on a dot
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentSlide = parseInt(dot.dataset.slide);
+                updateSlider();
+            });
+        });
+
+        // Auto-slide every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        }, 5000);
+    </script>
+</body>
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เทคโนโลยีมัลติมีเดีย</title>
+    <style>
+        @font-face {
+            font-family: 'ThaiSarabun';
+            src: url('thsarabunnew-webfont.woff') format('woff');
+        }
+
+        body {
+            font-family: 'ThaiSarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .text-section {
+            width: 50%;
+            padding-right: 40px;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #000000;
+        }
+
+        .text-section h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .text-section p {
+            color: #000000;
+        }
+
+        .image-section {
+            width: 45%;
+            text-align: center;
+        }
+
+        .image-section img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .image-section img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .text-section {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .image-section {
+                width: 100%;
+            }
+
+            .text-section h1 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ขั้นตอนการสมัครเรียน</title>
+    <style>
+        body {
+        font-family: 'Sarabun', Arial, sans-serif;
+        background-color: #f3f4f6;
+        margin: 0;
+        padding-top: 70px;  
+        color: #333;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+        font-size: 2rem;
+        color: #0d47a1;
+        margin-bottom: 40px;
+      }
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .step {
+        background: #ffffff;
+        border: 2px solid #0d47a1;
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .step:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+      }
+      .step-icon {
+        font-size: 2.5rem;
+        color: #0d47a1;
+        flex-shrink: 0;
+      }
+      .step-content {
+        display: flex;
+        flex-direction: column;
+      }
+      .step-content h2 {
+        font-size: 1.5rem;
+        margin: 0;
+        color: #0d47a1;
+      }
+      .step-content p {
+        font-size: 1rem;
+        color: #555;
+        margin-top: 5px;
+      }
+      .step-content a {
+        color: #0d47a1;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .step-content a:hover {
+        text-decoration: underline;
+      }
+      .container {
+max-width: 800px;
+margin: 20px auto;
+padding: 20px;
+position: relative; /* ทำให้ตำแหน่งที่ภายในกล่องสัมพันธ์กับตัวกล่องนี้ */
+}
+
+.steps {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.step {
+background: #ffffff;
+border: 2px solid #0d47a1;
+border-radius: 12px;
+padding: 20px;
+position: relative; /* ทำให้ตำแหน่งของปุ่มภายในกล่องนี้สัมพันธ์กับตัวกล่อง */
+box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.step:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.container {
+max-width: 800px;
+margin: 20px auto;
+padding: 20px;
+position: relative; /* ทำให้ตำแหน่งของปุ่มสัมพันธ์กับกล่อง */
+}
+
+.steps {
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.step {
+background: #ffffff;
+border: 2px solid #0d47a1;
+border-radius: 12px;
+padding: 20px;
+position: relative;
+box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.step:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* ปุ่ม */
+.btn {
+position: absolute;
+bottom: 10px;
+right: 10px;
+background-color: #0d47a1;
+color: white;
+padding: 10px 20px;
+text-decoration: none;
+border-radius: 5px;
+font-size: 1rem;
+transition: background-color 0.3s ease;
+border: none;
+cursor: pointer;
+}
+
+.btn:hover {
+background-color: #ffcc00;
+}
+
+.btn-outside {
+    display: block;
+    background-color: #0d47a1;
+    color: white;
+    text-align: center;
+    padding: 15px 20px; /* เพิ่มขนาด padding */
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 20px; /* เพิ่มระยะด้านล่าง */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.btn-outside:hover {
+    background-color: #ffc107; /* ใช้สีเหลืองที่เด่นกว่า */
+    transform: translateY(-2px); /* ลดการลอยให้ดูธรรมชาติ */
+}
+
+/* ปรับให้เหมาะสมกับหน้าจอเล็ก */
+@media (max-width: 768px) {
+    .btn-outside {
+        font-size: 1rem;
+        padding: 12px 15px; /* ลด padding บนหน้าจอเล็ก */
+    }
+}
+
+/* รองรับในมือถือ */
+@media (max-width: 768px) {
+.step {
+    padding: 10px;  /* ลดขนาด padding ของกล่องในมือถือ */
+}
+
+.btn {
+    bottom: 15px; /* ระยะห่างจากด้านล่างมากขึ้น */
+    right: 15px;  /* ระยะห่างจากด้านขวามากขึ้น */
+    font-size: 0.9rem; /* ขนาดตัวอักษรลดลง */
+}
+}
+
+
+</style>
+    
+  </head>
+  <body>
+    <div class="container">
+      <h1>ขั้นตอนการสมัครเรียน</h1>
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">📌</div>
+          <div class="step-content">
+            <h2>1. เข้าเว็บไซต์</h2>
+            <a href="https://admissions.rmutsb.ac.th/web_admis/" target="_blank">
+              <button class="btn">เข้าเว็บไซต์สมัครเรียน</button> 
+          </a>              
+            <p>เลือกระดับที่ต้องการสมัครเข้าเรียน เลือกคุณวุฒิที่จะใช้สมัครเรียน</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">🖋️</div>
+          <div class="step-content">
+            <h2>2. กรอกแบบฟอร์ม</h2>
+            <p>กรอกเเบบฟอร์มการสมัครเรียน กดปุ่มบันทึก เเละรอผลทางเว็บไซต์ที่สมัคร</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">✅</div>
+          <div class="step-content">
+            <h2>3. ตรวจสอบสถานะ</h2>
+            <p>ตรวจสอบสถานะการสมัครเเละกรอกเเบบฟอร์มรายงานตัวผ่านเว็บไซต์</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">🖨️</div>
+          <div class="step-content">
+            <h2>4. พิมพ์รายงานตัว</h2>
+            <p>เมื่อนักศึกษาทำทุกขั้นตอนเรียบร้อยให้พิมพ์ใบรายงานตัวพร้อมใบ Payin ชำระเงินผ่านช่องทางที่มหาวิทยาลัยกำหนด เเล้วส่งเอกสารรายงานตัวให้มหาวิทยาลัย</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-icon">📖</div>
+          <div class="step-content">
+            <h2>5. อ่านคู่มือ</h2>
+            <p>ถ้านักศึกษายังไม่เข้าใจขั้นตอนการสมัครเรียนสามารถ คลิกดาวน์โหลดคู่มือการสมัครเพิ่มเติม</p>
+          </div>
+        </div>
+        <!-- ปุ่มอยู่นอกกรอบ -->
+        <a href="https://admissions.rmutsb.ac.th/web_admis/" target="_blank" class="btn-outside">เข้าเว็บไซต์สมัครเรียน</a>
+      </div>
+    </div>   
+  </body> 
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Example</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS */
+        body {
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Footer Style */
+        .footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 1px 0;
+            margin-top: 40px;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 Multimedia technology | เทคโนโลยีมัลติมีเดีย .All rights reserved</p>
+        <p>ติดต่อเรา: sci.rmutsb.ac.th </p>
+    </footer>
+
+</body>
+</html>
+
+  
